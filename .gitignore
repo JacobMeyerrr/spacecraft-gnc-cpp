@@ -1,0 +1,18 @@
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Compiled binaries and build folders
+build/
+bin/
+*.o
+*.out
+*.exe
+
+# Python cache
+__pycache__/
+*.pyc
+
+
+
