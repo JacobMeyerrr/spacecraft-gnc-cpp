@@ -4,6 +4,10 @@ A modular C++ spacecraft Guidance, Navigation, and Control codebase with a curre
 
 The design separates reusable spacecraft/GNC functionality from assignment-specific validation. Homework 1 through Homework 4 live under `validation/` and act as regression cases for the library rather than defining its architecture.
 
+## Design Princples
+
+For this, I used an "agile-design" framework, adding and unit testing each function and module as needed rather than coding everything at once and including a bunch of "bloat." 
+
 ## Architecture
 
 ```text
