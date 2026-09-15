@@ -1,0 +1,166 @@
+SPACECRAFT GNC VALIDATION REFERENCE RESULTS
+===========================================
+
+HW1
+---
+The existing HW1 C++ cases were previously run successfully on macOS
+and matched the course reference outputs.
+
+HW2 Problem 1
+-------------
+P1(a), internal vector-first/scalar-last quaternion:
+  [ 0.11569184
+   -0.17353776
+    0.05784592
+    0.97629601 ]
+
+P1(b):
+  angle = 49.995027 deg
+  axis  = [-0.80176682, 0.26717672, 0.53459009]
+
+P1(c), course R312 convention:
+  angle = 77.307398 deg
+  axis  = [0.778858, -0.62707148, 0.012711151]
+
+P1(d)(A):
+  [1.1530199, 3.0318816, -1.8650037]
+
+P1(d)(B):
+  angle = 146.28149 deg
+  axis  = [-0.60832862, 0.26921339, 0.74663273]
+
+P1(d)(C):
+  [-0.15390144, -0.71445581, -0.68254468;
+    0.11447550, -0.69901540,  0.70588443;
+   -0.98143248,  0.030501985, 0.18936717]
+
+P1(d)(D):
+  roll  = -74.982886 deg
+  pitch =  43.042815 deg
+  yaw   = -102.15637 deg
+
+HW2 Problem 2
+-------------
+  semi-major axis = 9304 km
+  period = 8931.3225457 s
+  apogee altitude = 5252 km
+
+  initial C_ECI_B =
+  [-0.809321168668,  0.058566834034, -0.584439194355;
+    0.584798085665, -0.012601953317, -0.811081000748;
+   -0.054867521803, -0.998203945456, -0.024050744841]
+
+  initial Euler angles:
+    roll  = -91.38021856 deg
+    pitch =   3.14525688 deg
+    yaw   = 144.14893329 deg
+
+  numerical checks should be near machine precision:
+    Kepler residual      ~ 1e-15
+    orthogonality error  ~ 1e-15
+    determinant          ~ 1
+    five-orbit closure   ~ 1e-15
+
+HW2 Problem 3
+-------------
+  initial Sun angle ~= 109.075975 deg
+  prime-meridian angle = 75 deg
+  initial roll ~= 143.703841 deg
+  initial pitch = 0 deg
+  initial yaw = 90 deg
+
+  XPOP and -YPSL constraints should be satisfied to numerical precision.
+  Solar-array pointing error should be essentially zero.
+  Extra-credit magnetic-field norm should remain 1.
+
+HW3
+---
+  spacecraft inertia =
+  [90, 2, -1;
+   2, 120, 1;
+  -1, 1, 40] kg m^2
+
+  mu = 4.035040e14 m^3/s^2
+  Earth radius = 6.3753845e6 m
+  altitude = 700 km
+  orbital rate ~= 1.0673303363e-3 rad/s
+  period ~= 5886.8235 s
+
+  D = omega0 *
+  [0,-2,-10;
+   2,0,-4;
+   10,4,0]
+
+  K = omega0^2 *
+  [320,-6,-1;
+   -8,150,-1;
+   -4,3,30]
+
+  trim torque ~= [4.5567761872e-06;
+                  3.4175821404e-06;
+                 -2.2783880936e-06] N m
+
+  Representative linear/nonlinear regression values:
+
+  Case 1 max error ~= [0.1977, 0.3633, 2.0599] deg
+  Case 2 max error ~= [0.4468, 0.4323, 0.6400] deg
+  Case 3 max error ~= [2.4834, 9.1812, 0.5189] deg
+
+  The exact regression values can shift slightly with integrator
+  step size and numerical tolerance; the reusable equations and
+  qualitative behavior are the primary checks.
+
+HW4
+---
+Satellite properties:
+  Ix = Iz = 2500 kg m^2
+  Iy = 470 kg m^2
+  Earth-synchronous period = 86400 s
+  w0 = 2*pi/86400 rad/s
+
+Pointing limits:
+  |phi| <= 0.06 deg
+  |theta| <= 0.06 deg
+  |psi| <= 0.50 deg
+
+Disturbances:
+  Tdx = 3e-5 * (1 - 2 sin(w0 t)) N m
+  Tdy = 1.2e-4 * cos(w0 t) N m
+  Tdz = -6e-4 * cos(w0 t) N m
+
+Pitch controller:
+  Kp = 0.2291831181 N m/rad
+  tau = 90.57067674 s
+  Kd = 20.7572701 N m s/rad
+  phase margin ~= 76.3454 deg
+  gain margin = infinity
+  gain crossover ~= 0.045449 rad/s
+
+Momentum-biased design B (recommended regression design):
+  HB = 1200 N m s
+  K = 20 N m/rad
+  tau = 22.3607 s
+  k = 0.0246174
+
+  Reported closed-loop periodic maxima:
+    roll  ~= 0.05087 deg
+    pitch ~= 0.03000 deg
+    yaw   ~= 0.39436 deg
+
+Momentum-biased design A (alternate reference):
+  HB = 2000 N m s
+  K = 12.5 N m/rad
+  tau = 28.284 s
+  k ~= 0.019069
+
+  This is retained as an alternate design because multiple valid
+  controller choices can satisfy the assignment's design logic.
+  The validation outputs should be inspected directly rather than
+  assuming that the two designs have identical transient behavior.
+
+Independent reference validation
+---------------------------------
+Not yet included. The next validation layer should use independently
+published textbook/reference cases for quaternions, DCMs, orbital
+propagation, rigid-body dynamics, and controller design so the library
+is not certified only against the course homework solutions.
